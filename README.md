@@ -11,5 +11,5 @@ Just some scripts I run on my proxmox VMs to make it a bit easy to manage
 Run the scripts on your VM to quickly set up the required software and services.
 
 ```bash
-
+curl -sSL https://raw.githubusercontent.com/lunatine-dev/proxmox-scripts/main/setup-docker.sh | bash
 ```

@@ -28,3 +28,8 @@ echo \
 # Update and install Docker components with automatic yes
 apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Add user to docker group
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker

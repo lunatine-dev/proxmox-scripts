@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e  # Exit immediately on error
-
 # Check for root user
 if [ "$EUID" -ne 0 ]; then
   echo "Please run this script as root (e.g. sudo $0)"
@@ -29,7 +27,10 @@ echo \
 apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-# Add user to docker group
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker
+if ! getent group docker >/dev/null; then
+  groupadd docker
+fi
+
+usermod -aG docker "$SUDO_USER"
+
+echo "Docker installed and added $SUDO_USER to docker group. You may need to log out and back in for group changes to apply."
